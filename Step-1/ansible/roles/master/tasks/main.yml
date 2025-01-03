@@ -1,0 +1,30 @@
+- name: Install Packages(git, python3-pip)
+  ansible.builtin.apt:
+    name:
+      - git
+      - python3-pip
+    state: present
+
+- name: clone kubespray
+  ansible.builtin.shell: git clone https://github.com/kubernetes-sigs/kubespray.git
+
+- name: install Packages(kubespray)
+  ansible.builtin.shell: pip install -r requirements.txt
+  args:
+    chdir: kubespray
+
+- name: Copy sample directory
+  ansible.builtin.shell: cp -rfp inventory/sample inventory/mycluster
+  args:
+    chdir: kubespray
+
+- name: Copy inventory.ini file
+  ansible.builtin.copy:
+    src: inventory.ini
+    dest: kubespray/inventory/mycluster/inventory.ini
+
+- name: Update container_manager to docker
+  ansible.builtin.lineinfile:
+    path: kubespray/inventory/mycluster/group_vars/k8s_cluster/k8s-cluster.yml
+    regexp: '^container_manager:.*'
+    line: 'container_manager: docker'

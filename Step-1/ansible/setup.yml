@@ -1,0 +1,5 @@
+- name: Install k8s Cluster used by kubespray
+  hosts: master1
+  become: yes
+  roles:
+    - { role: master, tags: ["master"] }
