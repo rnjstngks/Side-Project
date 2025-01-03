@@ -7,6 +7,8 @@
 
 - name: clone kubespray
   ansible.builtin.shell: git clone https://github.com/kubernetes-sigs/kubespray.git
+  args:
+    creates: kubespray # kubespray 디렉터리가 이미 존재하면 git clone 과정을 스킵
 
 - name: install Packages(kubespray)
   ansible.builtin.shell: pip install -r requirements.txt
