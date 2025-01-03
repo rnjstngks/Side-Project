@@ -28,3 +28,8 @@
     path: kubespray/inventory/mycluster/group_vars/k8s_cluster/k8s-cluster.yml
     regexp: '^container_manager:.*'
     line: 'container_manager: docker'
+
+- name: Install k8s Cluster
+  ansible.builtin.shell: ansible-playbook -vvv -i inventory/mycluster/inventory.ini --become-user=root cluster.yml
+  args:
+    chdir: kubespray
