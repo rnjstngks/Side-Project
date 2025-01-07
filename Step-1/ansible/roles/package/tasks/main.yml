@@ -1,9 +1,23 @@
 - name: Stop unattended-upgrades.service
   ansible.builtin.service:
-    name: unattended-upgrades.service
+    name: unattended-upgrades
     state: stopped
 
-- name: Install Packages(git, python3-pip)
+- name: Remove unattended-upgrades.service
+  ansible.builtin.apt:
+    name: unattended-upgrades
+    state: absent
+
+- name: Stop and disable apt-daily timers
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  loop:
+    - apt-daily.timer
+    - apt-daily-upgrade.timer
+
+- name: Install Packages(sshpass)
   ansible.builtin.apt:
     name:
       - sshpass

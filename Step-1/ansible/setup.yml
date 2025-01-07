@@ -1,11 +1,13 @@
 - name: Install sshpass
   hosts: package
+  gather_facts: no
   become: yes
   roles:
     - { role: package, tags: ["package"] }
 
 - name: Install k8s Cluster used by kubespray
   hosts: master
+  gather_facts: no
   become: yes
   roles:
     - { role: master, tags: ["master"] }
