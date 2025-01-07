@@ -33,14 +33,14 @@ jobs:
                 terraform apply -auto-approve
         
             - name: Wait for VM to initialize
-              run: sleep 120
+              run: sleep 180
     
     ansible:
         needs: terraform # terraform job 완료 후 실행
         runs-on: self-hosted # 내 Window 환경에서 Terraform 실행
         
         steps:       
-            - name: Install k8s Cluster (Used kubespray)
+            - name: Install sshpass Package
               working-directory: /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-1/ansible
               run: ansible-playbook -vvv -i inventory.ini setup.yml --tags "package"
 
