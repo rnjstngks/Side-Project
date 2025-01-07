@@ -36,6 +36,7 @@ jobs:
               run: sleep 120
     
     ansible:
+        needs: terraform # terraform job 완료 후 실행
         runs-on: self-hosted # 내 Window 환경에서 Terraform 실행
         
         steps:       
