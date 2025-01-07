@@ -1,6 +1,10 @@
+- name: Stop unattended-upgrades.service
+  ansible.builtin.service:
+    name: unattended-upgrades.service
+    state: stopped
+
 - name: Install Packages(git, python3-pip)
   ansible.builtin.apt:
     name:
       - sshpass
     state: present
-    
