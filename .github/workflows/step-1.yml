@@ -33,7 +33,7 @@ jobs:
                 terraform apply -auto-approve
         
             - name: Wait for VM to initialize
-              run: sleep 180
+              run: sleep 300
     
     ansible:
         needs: terraform # terraform job 완료 후 실행
