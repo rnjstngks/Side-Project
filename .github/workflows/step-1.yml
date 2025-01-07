@@ -6,6 +6,8 @@ on:
             - main
         paths:
             - "Step-1/ansible/*"
+            - "Step-1/ansible/roles/master/tasks/*"
+            - "Step-1/ansible/roles/package/tasks/*"
             - "Step-1/terraform/*.tf"
 jobs:
     terraform:
