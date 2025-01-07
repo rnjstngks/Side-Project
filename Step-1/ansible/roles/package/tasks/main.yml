@@ -1,0 +1,5 @@
+- name: Install Packages(git, python3-pip)
+  ansible.builtin.apt:
+    name:
+      - sshpass
+    state: present
