@@ -1,3 +1,9 @@
+- name: Install sshpass
+  hosts: package
+  become: yes
+  roles:
+    - { role: package, tags: ["package"] }
+
 - name: Install k8s Cluster used by kubespray
   hosts: master
   become: yes

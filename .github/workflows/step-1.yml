@@ -42,4 +42,8 @@ jobs:
         steps:       
             - name: Install k8s Cluster (Used kubespray)
               working-directory: /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-1/ansible
+              run: ansible-playbook -vvv -i inventory.ini setup.yml --tags "package"
+
+            - name: Install k8s Cluster (Used kubespray)
+              working-directory: /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-1/ansible
               run: ansible-playbook -vvv -i inventory.ini setup.yml --tags "master"
