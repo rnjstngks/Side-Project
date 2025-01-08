@@ -13,11 +13,11 @@
 ## 2. Ansible을 사용하여 생성된 가상머신에서 kubespray를 사용하여 k8s 클러스터 구축
 
 * 1. inventory.ini 에 그룹 별 호스트 정의
-* package 그룹 => kubespray를 사용하기 전 필요한 패키지 및 작업 진행 하기 위해 모든 호스트를 넣어줍니다.
-* master 그룹 => kubespray 실행은 master1 서버에서만 진행하기 때문에, master1 호스트만 넣어줍니다.
+    * package 그룹 => kubespray를 사용하기 전 필요한 패키지 및 작업 진행 하기 위해 모든 호스트를 넣어줍니다.
+    * master 그룹 => kubespray 실행은 master1 서버에서만 진행하기 때문에, master1 호스트만 넣어줍니다.
 
 * 2. setup.yml 작성
-- 호스트 그룹 마다 Playbook이 실행 될 역할(role)과 태그 정의
+* 호스트 그룹 마다 Playbook이 실행 될 역할(role)과 태그 정의
 
 * 3. 역할(role) 별 태스크 구성
 * package 태스크:
