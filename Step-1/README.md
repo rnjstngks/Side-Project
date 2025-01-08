@@ -20,12 +20,12 @@
     * 호스트 그룹 마다 Playbook이 실행 될 역할(role)과 태그 정의
 
 * 2-3. 역할(role) 별 태스크 구성
-* package 태스크:
-    * kubespray 설치 작업을 하기 전 SSH 접속을 Password로 하기 위해 sshpass 패키지를 설치 해줍니다.
-    * 또한, 패키지 설치 시에 dpkg 잠금을 해결 하기 위해 unattended-upgrades 서비스와 apt-daily.timer를 종료 시켜줍니다.
+    * package 태스크:
+        * kubespray 설치 작업을 하기 전 SSH 접속을 Password로 하기 위해 sshpass 패키지를 설치 해줍니다.
+        * 또한, 패키지 설치 시에 dpkg 잠금을 해결 하기 위해 unattended-upgrades 서비스와 apt-daily.timer를 종료 시켜줍니다.
 
-* master 태스크:
-    * kubespray 실행하기 위한 사전 패키지 설치
-    * kubespray 용 inventory.ini 설정
-    * Container Runtime 설정
-    * kubespray 실행
+    * master 태스크:
+        * kubespray 실행하기 위한 사전 패키지 설치
+        * kubespray 용 inventory.ini 설정
+        * Container Runtime 설정
+        * kubespray 실행
