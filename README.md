@@ -12,13 +12,25 @@
 * 개발 언어: Go
 
 ## 목차
-* 1. [환경 구성](./Step-1)
-* 2. [웹 게시판 구현]()
-* 3. [CI/CD 파이프라인 구성]()
-* 4. [모니터링 및 로깅]()
+1. [환경 구성](./Step-1)
+2. [웹 게시판 구현]()
+3. [CI/CD 파이프라인 구성]()
+4. [모니터링 및 로깅]()
 
 ## 기본 환경 설정
-* 1. Window에 WSL 설치
+* Window에 WSL 설치
 ```sh
 wsl --install
 ```
+
+* Github Action Self-hosted 설치
+
+Repository의 Settings -> Actions -> Runners
+![alt text](github-action-1.png)
+
+New-self-hosted runner 버튼 클릭 후 자신의 OS 환경에 맞춰 설치 진행
+![alt text](github-action-2.png)
+
+* Terraform 설치
+
+* Ansible 설치
