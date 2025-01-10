@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyByte;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,6 +18,7 @@ import com.example.demo.answer.Answer;
 import com.example.demo.answer.AnswerRepository;
 import com.example.demo.question.Question;
 import com.example.demo.question.QuestionRepository;
+import com.example.demo.question.QuestionService;
 
 import jakarta.transaction.Transactional;
 
@@ -28,6 +30,9 @@ class SbbApplicationTests {
 	
 	@Autowired
 	private AnswerRepository answerRepository;
+	
+	@Autowired
+	private QuestionService questionService;
 
 //	@Test
 //	void testJpa() {
@@ -120,16 +125,25 @@ class SbbApplicationTests {
 //		assertEquals(2, answer.getQuestion().getId());
 //	}
 	
-	@Transactional
+//	@Transactional
+//	@Test
+//	void findByIdQuestion() {
+//		Optional<Question> oq = questionRepository.findById(2);
+//		assertTrue(oq.isPresent());
+//		Question question = oq.get();
+//		
+//		List<Answer> answerList = question.getAnswerList();
+//		
+//		assertEquals(1, answerList.size());
+//		assertEquals("네 자동으로 생성됩니다.", answerList.get(0).getContent());
+//	}
+	
 	@Test
-	void findByIdQuestion() {
-		Optional<Question> oq = questionRepository.findById(2);
-		assertTrue(oq.isPresent());
-		Question question = oq.get();
-		
-		List<Answer> answerList = question.getAnswerList();
-		
-		assertEquals(1, answerList.size());
-		assertEquals("네 자동으로 생성됩니다.", answerList.get(0).getContent());
+	void insertQuestionTestData() {
+		for (int i = 1; i <= 300; i++) {
+			String subject = String.format("테스트 데이터입니다:[%03d]", i);
+			String content = "내용 무";
+			questionService.create(subject, content);
+		}
 	}
 }

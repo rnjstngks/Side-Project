@@ -30,6 +30,7 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+	implementation 'org.springframework.boot:spring-boot-starter-validation' // form 클래스를 사용해 사용자로 부터 입력 받은 값을 검증 하기위한 디펜던시
 }
 
 tasks.named('test') {
