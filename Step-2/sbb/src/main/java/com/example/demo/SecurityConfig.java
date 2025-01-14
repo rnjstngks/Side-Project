@@ -2,6 +2,8 @@ package com.example.demo;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,12 +29,26 @@ public class SecurityConfig {
 					.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**")))
 			.headers((headers) -> headers
 					.addHeaderWriter(new XFrameOptionsHeaderWriter(
-							XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)));
+							XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
+			.formLogin((formLogin) -> formLogin	// Login이 정상적으로 되면, / 페이지로 돌아감
+					.loginPage("/user/login")
+					.defaultSuccessUrl("/"))
+			.logout((logout) -> logout	// logout이 정상적으로 되면, / 페이지로 돌아감
+					.logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+					.logoutSuccessUrl("/")
+					.invalidateHttpSession(true))	// 해당 설정을 통해 logout 시 생성된 사용자 세션도 삭제하도록 처리
+			;
 		return http.build();
 	}
 	
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+	
+	@Bean
+	// AuthenticationManager는 스프링 시큐리티 인증을 처리합니다.
+	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+		return authenticationConfiguration.getAuthenticationManager();
 	}
 }

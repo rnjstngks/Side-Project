@@ -1,8 +1,13 @@
 package com.example.demo.user;
 
+import java.util.Optional;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.DataNotFoundException;
+
+import groovyjarjarantlr4.v4.parse.ANTLRParser.throwsSpec_return;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor // 새로운 필드를 추가할 때, 생성자를 만들어서 관리해야하는 번거로움을 없애줌
@@ -20,5 +25,14 @@ public class UserService {
 		user.setPassword(passwordEncoder.encode(password));
 		userRepository.save(user);
 		return user;
+	}
+	
+	public SiteUser getUser(String username) {
+		Optional<SiteUser> siteUser = userRepository.findByUsername(username);
+		if (siteUser.isPresent()) {
+			return siteUser.get();
+		} else {
+			throw new DataNotFoundException("siteuser not found");
+		}
 	}
 }
