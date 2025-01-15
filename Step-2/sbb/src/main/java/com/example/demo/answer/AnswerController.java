@@ -2,6 +2,7 @@ package com.example.demo.answer;
 
 import java.security.Principal;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +29,7 @@ public class AnswerController {
 	
 	private final UserService userService;
 	
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/create/{id}")
 	// 현재 로그인한 사용자 정보를 알려주는 Principal 객체는 스프링 시큐리티가 제공하는 객체 입니다. 
 	public String createAnswer(Model model, @PathVariable("id") Integer id, @Valid AnswerForm answerForm, BindingResult bindingResult, Principal principal) {
