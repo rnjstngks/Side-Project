@@ -25,6 +25,7 @@ public class QuestionService {
 		return questionRepository.findAll();
 	}
 	
+	// 질문의 ID를 조회하는 메서드
 	public Question getQuestion(Integer id) {
 		Optional<Question> question = questionRepository.findById(id);
 		if (question.isPresent()) {
@@ -34,6 +35,7 @@ public class QuestionService {
 		}
 	}
 	
+	// 질문을 생성하는 메서드
 	public void create(String subject, String content, SiteUser user) {
 		Question q = new Question();
 		q.setSubject(subject);
@@ -43,10 +45,24 @@ public class QuestionService {
 		questionRepository.save(q);
 	}
 	
+	// 질문 리스트를 페이징 하는 메서드
 	public Page<Question> getList(int page) {
 		List<Sort.Order> sorts = new ArrayList<>();
 		sorts.add(Sort.Order.desc("createDate"));
 		Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
 		return questionRepository.findAll(pageable);
+	}
+	
+	// 질문을 수정하는 메서드
+	public void modify(Question question, String subject, String content) {
+		question.setSubject(subject);
+		question.setContent(content);
+		question.setModifyDate(LocalDateTime.now());
+		questionRepository.save(question);
+	}
+	
+	// 질문을 삭제하는 메서드
+	public void delete(Question question) {
+		questionRepository.delete(question);
 	}
 }
