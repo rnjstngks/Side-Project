@@ -65,4 +65,10 @@ public class QuestionService {
 	public void delete(Question question) {
 		questionRepository.delete(question);
 	}
+	
+	// 질문에 추천을 하기 위한 메서드
+	public void vote(Question question, SiteUser siteUser) {
+		question.getVoter().add(siteUser);
+		questionRepository.save(question);
+	}
 }

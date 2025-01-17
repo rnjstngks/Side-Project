@@ -107,4 +107,13 @@ public class QuestionController {
 	// redirect는 말 그대로 URL의 주소를 /로 변경해줌 그래서 URL을 초기화 할 떄 사용
 	// return "question_list" 처럼 뷰 즉, html 템플릿으로 가면 브라우저의 URL은 변경되지 않고 페이지는 요청된 question_list 템플릿으로 갑니다.
 	// 따라서 GetMapping("/delete/{id}")의 메서드에 return 부분에 redirect가 아닌 html 템플릿을 넣게 되면 URL과 템플릿 뷰와 맞지 않아 오류가 나오게 됩니다.
+	
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/vote/{id}")
+	public String questionVote(Principal principal, @PathVariable("id") Integer id) {
+		Question question = questionService.getQuestion(id);
+		SiteUser siteUser = userService.getUser(principal.getName());
+		questionService.vote(question, siteUser);
+		return String.format("redirect:/question/detail/%s", id);
+	}
 }
