@@ -24,8 +24,8 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'	// 저장 시 tomcat 자동 재시작
 	compileOnly 'org.projectlombok:lombok'	// lombok 사용하기 위한 디펜던시
     annotationProcessor 'org.projectlombok:lombok'	// lombok 사용하기 위한 디펜던시
-	runtimeOnly 'com.h2database:h2'	// h2 데이터베이스 사용
-	/*runtimeOnly 'mysql:mysql-connector-java:8.0.33'	// MySQL Connector*/
+	/*runtimeOnly 'com.h2database:h2'	// h2 데이터베이스 사용*/
+	runtimeOnly 'mysql:mysql-connector-java:8.0.33'	// MySQL Connector
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // JPA 사용할 수 있도록 디펜던시 설정
 	testImplementation 'org.junit.jupiter:junit-jupiter'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -34,6 +34,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation' // form 클래스를 사용해 사용자로 부터 입력 받은 값을 검증 하기위한 디펜던시
 	implementation 'org.springframework.boot:spring-boot-starter-security' // 스프링 시큐리티 사용할 수 있도록 디펜던시 설정
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6' // 타임리프에서 스프링 시큐리티 사용
+	implementation 'org.commonmark:commonmark:0.21.0' // 마크다운 기능 적용하기 위한 디펜던시
 }
 
 tasks.named('test') {
