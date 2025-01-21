@@ -5,7 +5,12 @@ on:
         branches:
             - main
         paths:
-            - "Step-2/sbb/*"
+            - "Step-2/sbb/src/main/resources/templates/*.html"
+            - "Step-2/sbb/build.gradle"
+            - "Step-2/sbb/src/main/java/com/example/demo/answer/*"
+            - "Step-2/sbb/src/main/java/com/example/demo/question/*"
+            - "Step-2/sbb/src/main/java/com/example/demo/user/*"
+            - "Step-2/sbb/src/main/java/com/example/demo/*"
 
 jobs:
     gradle:
