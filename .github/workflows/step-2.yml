@@ -37,8 +37,6 @@ jobs:
               working-directory: /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-2/sbb
               run: ./gradlew build --stacktrace --info
             
-            - name: Upload jar file
-              uses: actions/upload-artifact@v3
-              with:
-                name: build-artifacts
-                path: /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-3/
+            - name: Copy jar file
+              working-directory: /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-2/sbb/build/libs
+              run: cp *.jar /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-3/
