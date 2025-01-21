@@ -1,0 +1,39 @@
+name: Step-2
+
+on: 
+    push:
+        branches:
+            - main
+        paths:
+            - "Step-2/sbb/*"
+
+jobs:
+    gradle:
+        runs-on: ubuntu-latest  # GitHub 제공 가상 환경 사용
+        
+        steps:
+            - name: checkout sources
+              uses: actions/checkout@v4
+
+            - name: Set up JDK 17
+              uses: action/setup-java@v3
+              with:
+                distribution: 'temurin'
+                java-version: '17'
+                cache: 'gradle'
+        
+            # - name: Grant execute permission for Gradle
+            #   run: chmod +x Step-2/sbb/gradlew
+        
+            - name: Setup Gradle
+              uses: gradle/actions/setup-gradle@v3
+        
+            - name: Build with Gradle
+              working-directory: Step-2/sbb/
+              run: ./gradlew build --stacktrace --info
+            
+            - name: Upload jar file
+              uses: actions/upload-artifact@v3
+              with:
+                name: build-artifacts
+                path: Step-3/
