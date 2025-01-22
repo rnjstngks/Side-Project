@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: was
+  labels:
+    app: was
+spec:
+  containers:
+  - name: was
+    image: rnjstngks/side-project-was:v1
+    ports:
+    - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: was-service
+spec:
+  type: clusterIP
+  clusterIP: 10.233.0.2
+  selector:
+    app: was
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
