@@ -40,3 +40,12 @@ jobs:
             - name: Copy jar file
               working-directory: /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-2/sbb/build/libs
               run: cp *.jar /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-3/
+
+            - name: Push jar file
+              working-directory: /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-3/
+              run: |
+                git config --global user.name "rnjstngks"
+                git config --global user.email "rnjstngks267@naver.com"
+                git add *.jar
+                git commit -m "Upload jar file"
+                git push origin main
