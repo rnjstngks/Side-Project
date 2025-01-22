@@ -16,7 +16,7 @@ kind: Service
 metadata:
   name: was-service
 spec:
-  type: clusterIP
+  type: ClusterIP
   clusterIP: 10.233.0.2
   selector:
     app: was
