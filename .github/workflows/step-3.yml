@@ -43,6 +43,7 @@ jobs:
     
     Docker_image_build:
         runs-on: self-hosted
+        needs: gradle_build
 
         steps:
             - name: checkout sources
@@ -63,6 +64,7 @@ jobs:
 
     Change_YAML_file:
         runs-on: self-hosted
+        needs: Docker_image_build
 
         steps:
             - name: Change Image Tage
@@ -70,3 +72,11 @@ jobs:
               run: |
                 sed -i 's|image: rnjstngks/side-project-was:.*|image: rnjstngks/side-project-was:${{ github.run_number }}|g' was.yaml
       
+            - name: Change was.yaml file
+              working-directory: /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-3/
+              run: |
+                git config --global user.name "github-action[bot]"
+                git config --global user.email "github-actions[bot]@users.noreply.github.com"
+                git add was.yaml
+                git commit -m "Change was.yaml file"
+                git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/rnjstngks/Side-Project.git main
