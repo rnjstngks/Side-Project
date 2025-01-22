@@ -11,6 +11,7 @@ on:
             - "Step-2/sbb/src/main/java/com/example/demo/question/*"
             - "Step-2/sbb/src/main/java/com/example/demo/user/*"
             - "Step-2/sbb/src/main/java/com/example/demo/*"
+            - "Step-2/sbb/src/main/resources/application.properties"
 
 jobs:
     gradle_build:
