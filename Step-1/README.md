@@ -22,6 +22,8 @@
 wsl --install
 ```
 
+<br>
+
 ## WSL 환경에서 Github Action 을 실행하기 위해 Self-hosted 설치
 
 Repository의 Settings -> Actions -> Runners
@@ -30,6 +32,8 @@ Repository의 Settings -> Actions -> Runners
 New-self-hosted runner 버튼 클릭 후 자신의 OS 환경에 맞춰 설치 진행
 ![alt text](github-action-2.png)
 
+<br>
+
 ## WSL 환경에 Terraform 설치
 
 ```sh
@@ -37,6 +41,8 @@ wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/sh
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 sudo apt update && sudo apt install terraform
 ```
+
+<br>
 
 ## WSL 환경에 Ansible 설치
 
