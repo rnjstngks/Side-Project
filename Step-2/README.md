@@ -42,5 +42,4 @@ source ~/.bashrc
 ```sh
 ./gradlew --stop
 ./gradlew clean
-./gradlew build
 ```

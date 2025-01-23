@@ -1,9 +1,51 @@
 # Step-1
 
 ## 목표 
-1. Terraform을 사용하여 vSphere 환경에서 가상머신을 생성
+1. Terraform을 사용하여 클라우드(vSphere) 환경에서 가상머신을 생성
 2. Ansible을 사용하여 생성된 가상머신에서 kubespray를 사용하여 k8s 클러스터 구축
 3. Github Action을 사용해서 1,2번 내용을 한꺼번에 실행하도록 설정
+
+### 사전 준비
+
+우선, 저는 현재 사용하고 있는 Window 노트북에서 코드를 작성하고 실행 할 예정 입니다.
+
+따라서 사전 준비 작업이 필요합니다.
+
+### WSL 설치
+
+* 명령 프롬프트 창을 열어서 아래의 명령어를 입력해줍니다.
+```sh
+wsl --install
+```
+
+### WSL 환경에서 Github Action 을 실행하기 위해 Self-hosted 설치
+
+Repository의 Settings -> Actions -> Runners
+![alt text](github-action-1.png)
+
+New-self-hosted runner 버튼 클릭 후 자신의 OS 환경에 맞춰 설치 진행
+![alt text](github-action-2.png)
+
+### WSL 환경에 Terraform 설치
+
+```sh
+wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt install terraform
+```
+
+### WSL 환경에 Ansible 설치
+
+```sh
+sudo apt update
+sudo apt install software-properties-common
+sudo add-apt-repository --yes --update ppa:ansible/ansible
+sudo apt install ansible
+```
+
+-----------
+
+이제 부터 인프라 환경 구성을 해보도록 하겠습니다.
 
 ## 1. Terraform을 사용하여 vSphere 환경에서 가상머신을 생성
 
