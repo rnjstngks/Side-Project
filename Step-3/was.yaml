@@ -1,15 +1,23 @@
 apiVersion: v1
-kind: Pod
+kind: Deployment
 metadata:
   name: was
   labels:
     app: was
 spec:
-  containers:
-  - name: was
-    image: rnjstngks/side-project-was:5
-    ports:
-    - containerPort: 8080
+  replicas: 3
+  selector:
+    app: was
+  template:
+    metadata:
+      labels:
+        app: was
+    spec:
+      containers:
+      - name: was
+        image: rnjstngks/side-project-was:5
+        ports:
+        - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
