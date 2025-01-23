@@ -52,10 +52,13 @@ sudo apt install software-properties-common
 sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible
 ```
-
 -----------
 
+<br>
+
 이제 부터 인프라 환경 구성을 해보도록 하겠습니다.
+
+<br>
 
 ## 1. Terraform을 사용하여 vSphere 환경에서 가상머신을 생성
 
