@@ -138,12 +138,12 @@ class SbbApplicationTests {
 //		assertEquals("네 자동으로 생성됩니다.", answerList.get(0).getContent());
 //	}
 	
-	@Test
-	void insertQuestionTestData() {
-		for (int i = 1; i <= 300; i++) {
-			String subject = String.format("테스트 데이터입니다:[%03d]", i);
-			String content = "내용 무";
-			questionService.create(subject, content, null);
-		}
-	}
+//	@Test
+//	void insertQuestionTestData() {
+//		for (int i = 1; i <= 300; i++) {
+//			String subject = String.format("테스트 데이터입니다:[%03d]", i);
+//			String content = "내용 무";
+//			questionService.create(subject, content, null);
+//		}
+//	}
 }
