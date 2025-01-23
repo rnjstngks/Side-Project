@@ -50,7 +50,7 @@ jobs:
               uses: actions/checkout@v4
 
             - name: Permission change
-              run: chmod 666 /var/run/docker.sock
+              run: sudo chmod 666 /var/run/docker.sock
               
             - name: Docker Build
               working-directory: /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-3/was/
