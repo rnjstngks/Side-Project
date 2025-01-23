@@ -4,14 +4,14 @@ on:
     push:
         branches:
             - main
-        paths:
+        paths: # 해당 폴더들에서 Push가 되면 작업이 시작되도록 경로 설정
             - "Step-1/ansible/*"
             - "Step-1/ansible/roles/master/tasks/*"
             - "Step-1/ansible/roles/package/tasks/*"
             - "Step-1/terraform/*.tf"
 jobs:
     terraform:
-        runs-on: self-hosted # 내 Window 환경에서 Terraform 실행
+        runs-on: self-hosted
         
         steps:
             - name: Checkout repository
@@ -39,7 +39,7 @@ jobs:
     
     ansible:
         needs: terraform # terraform job 완료 후 실행
-        runs-on: self-hosted # 내 Window 환경에서 Terraform 실행
+        runs-on: self-hosted
         
         steps:       
             - name: Install sshpass Package
