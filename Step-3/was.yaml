@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: was
-    image: rnjstngks/side-project-was:2
+    image: rnjstngks/side-project-was:5
     ports:
     - containerPort: 8080
 ---
