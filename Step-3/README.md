@@ -43,7 +43,14 @@ working-directory에서 정의해둔 Path에는 개발한 코드들이 있고 �
 
 ## 2. Docker 이미지 빌드
 
-* Github Action 파일에서 Image Build 진행 (step-3)[./github/workflows/step-3]
+* Github Action 파일에서 Image Build 진행 (step-3)[/.github/workflows/step-3]
+
+```sh
+Docker_image_build:
+    runs-on: self-hosted
+    needs: gradle_build
+```
+
 
 ```sh
 - name: Permission change
@@ -56,13 +63,15 @@ working-directory에서 정의해둔 Path에는 개발한 코드들이 있고 �
   run: docker build -t rnjstngks/side-project-was:${{ github.run_number }} .
  ```             
 
-          
-            - name: Docker Hub login
-              uses: docker/login-action@v2
-              with:
-                username: ${{ secrets.DOCKER_USERNAME }}
-                password: ${{ secrets.DOCKER_PASSWORD }}
-              
-            - name: Docker Push
-              run: docker push rnjstngks/side-project-was:${{ github.run_number }}
+```sh
+- name: Docker Hub login
+  uses: docker/login-action@v2
+  with:
+    username: ${{ secrets.DOCKER_USERNAME }}
+    password: ${{ secrets.DOCKER_PASSWORD }}
+```
+
+```sh
+- name: Docker Push
+  run: docker push rnjstngks/side-project-was:${{ github.run_number }}
 ```
