@@ -16,32 +16,3 @@
 2. [웹 게시판 구현](./Step-2/)
 3. [CI/CD 파이프라인 구성](./Step-3/)
 4. [모니터링 및 로깅]()
-
-## 기본 환경 설정
-* Window에 WSL 설치
-```sh
-wsl --install
-```
-
-* Github Action Self-hosted 설치
-
-Repository의 Settings -> Actions -> Runners
-![alt text](github-action-1.png)
-
-New-self-hosted runner 버튼 클릭 후 자신의 OS 환경에 맞춰 설치 진행
-![alt text](github-action-2.png)
-
-* Terraform 설치
-```sh
-wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-sudo apt update && sudo apt install terraform
-```
-
-* Ansible 설치
-```sh
-sudo apt update
-sudo apt install software-properties-common
-sudo add-apt-repository --yes --update ppa:ansible/ansible
-sudo apt install ansible
-```
