@@ -8,7 +8,7 @@
 
 ## 1. Gradle build 진행
 
-* Github Action 파일에서 Build 진행 (step-3)[./github/workflows/step-3]
+* Github Action 파일에서 Build 진행 [step-3](/.github/workflows/step-3)
 
 working-directory에서 정의해둔 Path에는 개발한 코드들이 있고 해당 Path에서 "./gradlew build" 명령을 통해 빌드를 진행합니다.
 
@@ -43,7 +43,7 @@ working-directory에서 정의해둔 Path에는 개발한 코드들이 있고 �
 
 ## 2. Docker 이미지 빌드
 
-* Github Action 파일에서 Image Build 진행 (step-3)[/.github/workflows/step-3]
+* Github Action 파일에서 Image Build 진행 [step-3](/.github/workflows/step-3)
 
 ```sh
 Docker_image_build:
