@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -29,6 +30,7 @@ public class SecurityConfig {
 					.requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
 			.csrf((csrf) -> csrf
 					.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"))
+					.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()) // ✅ CSRF 토큰을 쿠키로 제공
 					)
 			.headers((headers) -> headers
 					.addHeaderWriter(new XFrameOptionsHeaderWriter(
