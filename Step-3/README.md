@@ -4,9 +4,11 @@
 * Gradle build를 진행
 * Docker 빌드를 통해 이미지 생성
 * was.yaml 파일의 내용 중 이미지 태그 변경하여 POD내의 컨테이너 이미지 변경
-* 위 모든 과정을 Github Action 에서 실행
+* ArgoCD를 사용하여 변경된 내용으로 자동 배포
 
-## 1. Gradle build 진행
+## 1. ArgoCD 설치
+
+## 2. Gradle build 진행
 
 * Github Action 파일에서 Build 진행 [step-3.yml](/.github/workflows/step-3.yml)
 
@@ -45,7 +47,7 @@ Github Token은 secrets 변수 처리를 미리 해주어서, Push 해줄 때, G
 
 <br>
 
-## 2. Docker 이미지 빌드
+## 3. Docker 이미지 빌드
 
 * Github Action 파일에서 Image Build 진행 [step-3.yml](/.github/workflows/step-3.yml)
 
@@ -59,7 +61,7 @@ Docker_image_build:
 
 docker build 를 하기 전, docker.sock의 권한을 조정해줍니다.
 
-해당 권한을 조정해주지 않으면 docker build 명령을 사용할 떄, Permission 오류가 나오게 됩니다.
+해당 권한을 조정해주지 않으면 docker build 명령을 사용할 때, Permission 오류가 나오게 됩니다.
 
 ```sh
 - name: Permission change
@@ -76,7 +78,7 @@ docker build 를 진행해줍니다.
   run: docker build -t rnjstngks/side-project-was:${{ github.run_number }} .
  ```
 
-
+그리고 Docker hub에 이미지를 Push 해주기 위해 Docker hub에 로그인 해줍니다.
 
 ```sh
 - name: Docker Hub login
@@ -86,7 +88,33 @@ docker build 를 진행해줍니다.
     password: ${{ secrets.DOCKER_PASSWORD }}
 ```
 
+앞서 빌드한 이미지를 Docker hub에 Push 해줍니다.
+
+Push 해주는 이미지 태그 값은, github action 의 동작 번호로 지정 해줍니다.
+
 ```sh
 - name: Docker Push
   run: docker push rnjstngks/side-project-was:${{ github.run_number }}
+```
+
+새로운 이미지로 컨테이너 이미지를 변경하기 위해 was.yaml 파일의 내용 중, 이미지 태그 부분 sed 명령어를 사용하여 변경해줍니다.
+
+```sh
+- name: Change Image Tag
+  working-directory: /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-3/
+  run: |
+    sed -i 's|image: rnjstngks/side-project-was:.*|image: rnjstngks/side-project-was:${{ github.run_number }}|g' was.yaml
+```
+
+마지막으로 내용이 변경된 was.yaml 파일을 다시 git push 해줍니다.
+
+```sh      
+- name: Change was.yaml file
+  working-directory: /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-3/
+  run: |
+    git config --global user.name "github-action[bot]"
+    git config --global user.email "github-actions[bot]@users.noreply.github.com"
+    git add was.yaml
+    git commit -m "Change was.yaml file"
+    git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/rnjstngks/Side-Project.git main
 ```

@@ -70,7 +70,7 @@ jobs:
         needs: Docker_image_build
 
         steps:
-            - name: Change Image Tage
+            - name: Change Image Tag
               working-directory: /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-3/
               run: |
                 sed -i 's|image: rnjstngks/side-project-was:.*|image: rnjstngks/side-project-was:${{ github.run_number }}|g' was.yaml
