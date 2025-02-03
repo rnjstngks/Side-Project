@@ -3,12 +3,12 @@
 ## 목표 
 * Gradle build를 진행
 * Docker 빌드를 통해 이미지 생성
-* 생성된 이미지로 POD 로 배포
+* was.yaml 파일의 내용 중 이미지 태그 변경하여 POD내의 컨테이너 이미지 변경
 * 위 모든 과정을 Github Action 에서 실행
 
 ## 1. Gradle build 진행
 
-* Github Action 파일에서 Build 진행 [step-3](/.github/workflows/step-3.yml)
+* Github Action 파일에서 Build 진행 [step-3.yml](/.github/workflows/step-3.yml)
 
 working-directory에서 정의해둔 Path에는 개발한 코드들이 있고 해당 Path에서 "./gradlew build" 명령을 통해 빌드를 진행합니다.
 
@@ -30,6 +30,8 @@ working-directory에서 정의해둔 Path에는 개발한 코드들이 있고 �
 
 마지막으로 생성된 jar 파일을 Github 리포지터리에 Push 해주면, gradle_build 과정이 끝나게 됩니다.
 
+Github Token은 secrets 변수 처리를 미리 해주어서, Push 해줄 때, Github Token을 사용해서 push를 해주었습니다.
+
 ```sh
 - name: Push jar file
   working-directory: /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-3/was/
@@ -41,9 +43,13 @@ working-directory에서 정의해둔 Path에는 개발한 코드들이 있고 �
     git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/rnjstngks/Side-Project.git main
 ```
 
+<br>
+
 ## 2. Docker 이미지 빌드
 
-* Github Action 파일에서 Image Build 진행 [step-3](/.github/workflows/step-3.yml)
+* Github Action 파일에서 Image Build 진행 [step-3.yml](/.github/workflows/step-3.yml)
+
+앞서 gradle build 작업이 성공적으로 완료가 되면 다음 작업이 실행 되도록 "needs: gradle_build" 를 추가 해주었습니다.
 
 ```sh
 Docker_image_build:
@@ -51,17 +57,26 @@ Docker_image_build:
     needs: gradle_build
 ```
 
+docker build 를 하기 전, docker.sock의 권한을 조정해줍니다.
+
+해당 권한을 조정해주지 않으면 docker build 명령을 사용할 떄, Permission 오류가 나오게 됩니다.
 
 ```sh
 - name: Permission change
   run: sudo chmod 666 /var/run/docker.sock
  ```
 
+이제 working-directory 에서 정의한 Path 에 이미지 빌드에 필요한 Dockerfile 및 jar 파일을 같은 디렉터리에 놓고,
+
+docker build 를 진행해줍니다.
+
  ```sh
 - name: Docker Build
   working-directory: /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-3/was/
   run: docker build -t rnjstngks/side-project-was:${{ github.run_number }} .
- ```             
+ ```
+
+
 
 ```sh
 - name: Docker Hub login
