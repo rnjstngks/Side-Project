@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: was
-        image: rnjstngks/side-project-was:7
+        image: rnjstngks/side-project-was:8
         ports:
         - containerPort: 8080
 ---
