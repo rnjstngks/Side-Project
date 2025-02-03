@@ -30,7 +30,7 @@ public class SecurityConfig {
 					.requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
 			.csrf((csrf) -> csrf
 					.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"))
-					.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()) // ✅ CSRF 토큰을 쿠키로 제공
+//					.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()) // ✅ CSRF 토큰을 쿠키로 제공
 					)
 			.headers((headers) -> headers
 					.addHeaderWriter(new XFrameOptionsHeaderWriter(
