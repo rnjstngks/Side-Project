@@ -26,7 +26,10 @@ jobs:
         
             - name: Build with Gradle
               working-directory: /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-2/sbb
-              run: ./gradlew build --stacktrace --info
+              run: |
+                ./gradlew --stop
+                ./gradlew clean
+                ./gradlew build --stacktrace --info
             
             - name: Copy jar file
               working-directory: /mnt/c/Users/Snetsystems/Documents/GitHub/Side-Project/Step-2/sbb/build/libs
