@@ -26,11 +26,8 @@ public class SecurityConfig {
 		// 아래 코드는 인증되지 않은 모든 페이지의 요청을 허락한다는 의미, 따라서 로그인하지 않더라도 모든 페이지에 접근할 수 있도록 함
 		// H2 콘솔은 스프링 시큐리티 CSRF 처리를 예외로 함
 		http
-			.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-			.requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
-			.csrf((csrf) -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"))
-//					.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()) // ✅ CSRF 토큰을 쿠키로 제공
-					)
+			.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests.requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
+			.csrf().disable()
 			.headers((headers) -> headers
 					.addHeaderWriter(new XFrameOptionsHeaderWriter(
 							XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
