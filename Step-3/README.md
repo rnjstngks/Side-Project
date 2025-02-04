@@ -6,7 +6,29 @@
 * was.yaml 파일의 내용 중 이미지 태그 변경하여 POD내의 컨테이너 이미지 변경
 * ArgoCD를 사용하여 변경된 내용으로 자동 배포
 
-## 1. ArgoCD 설치
+## 1. ArgoCD 설치 및 Application 설정
+
+* 1-1. Helm 차트 설치
+
+```sh
+curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+sudo apt-get install apt-transport-https --yes
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install helm
+```
+
+* 1-2. ArgoCD 설치
+
+```sh
+helm repo add argo https://argoproj.github.io/argo-helm
+helm install argocd argo/argo-cd
+```
+
+* 1-3. Application 추가
+
+was, web.yaml 파일이 있는 Github Repository를 등록해주면 자동으로 ArgoCD가 쿠버네티스 클러스터에서 배포를 진행해줍니다.
+
 
 ## 2. Gradle build 진행
 
