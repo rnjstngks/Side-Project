@@ -49,9 +49,11 @@ helm install loki-stack grafana/loki-stack -n monitor
 * 2-3. Grafana의 Data sources에 Loki 추가
 
   * Grafana 대시보드 접속 -> Connections -> Add new connection -> loki 검색
+  
   ![alt text](image.png)
 
-  * URL 입력해줍니다. 
+  * URL 입력해줍니다.
+
   ![alt text](image-1.png)
 
 ## 3. 대시보드 생성
