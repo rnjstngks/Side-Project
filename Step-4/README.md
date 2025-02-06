@@ -75,9 +75,7 @@ helm install loki-stack grafana/loki-stack -n monitor
 
   POD의 실시간 CPU 사용량(%)을 집계 하였습니다.
 
-<br>
-
-  * Mem 사용량(%) 확인하기 위한 쿼리
+    * Mem 사용량(%) 확인하기 위한 쿼리
   ```sh
   (container_memory_working_set_bytes{namespace="test"} / 8.3351e+9) * 100
   ```
