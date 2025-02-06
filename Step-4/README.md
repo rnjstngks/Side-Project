@@ -91,6 +91,10 @@ helm install loki-stack grafana/loki-stack -n monitor
 
   * 로그 대시보드 생성
 
-  Grafana 접속 -> Explore -> data source를 loki로 선택 -> Select label을 POD로 선택 -> Select value 값에서 원하는 POD 선택
+  Grafana 접속 -> Explore -> data source를 loki로 선택 -> Select label을 pod로 선택 -> Select value 값에서 원하는 POD 선택
+
+  ![alt text](image-3.png)
+
+  그 후 상단 Add 메뉴에서 `Add to dashboard` 선택하여 대시보드 추가
   
-  ![alt text](image-2.png)
+  ![alt text](image-4.png)
